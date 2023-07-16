@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
+#include <window.h>
 
 int execmd(const char * cmd, char * result, int len)
 {
