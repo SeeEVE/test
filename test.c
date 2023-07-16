@@ -1,18 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <windows.h>
 
 int execmd(const char * cmd, char * result, int len)
 {
 	char buffer[128];
-	result[0] = '\0';   // resultÔ­ÓĞÄÚÈİ»áÖ±½Ó±»¸²¸Ç
-	FILE* pipe = popen(cmd, "r");  // ´ò¿ª¹ÜµÀ£¬²¢Ö´ĞĞÃüÁî
-	if (!pipe) return -2;  // ÔËĞĞÊ§°Ü
+	result[0] = '\0';   // resultåŸæœ‰å†…å®¹ä¼šç›´æ¥è¢«è¦†ç›–
+	FILE* pipe = popen(cmd, "r");  // æ‰“å¼€ç®¡é“ï¼Œå¹¶æ‰§è¡Œå‘½ä»¤
+	if (!pipe) return -2;  // è¿è¡Œå¤±è´¥
 	while(!feof(pipe) && len>1)
 		{
 			int limit = len>128 ? 128: len;
-			if(fgets(buffer, limit, pipe))  // ½«¹ÜµÀÊä³öµ½resultÖĞ
+			if(fgets(buffer, limit, pipe))  // å°†ç®¡é“è¾“å‡ºåˆ°resultä¸­
 				{
 					strcat(result, buffer);
 					len -= strlen(buffer);
@@ -20,17 +19,17 @@ int execmd(const char * cmd, char * result, int len)
 		}
 	if(len<=1 && !feof(pipe))
 		{
-			pclose(pipe);  // ¹Ø±Õ¹ÜµÀ
-			printf("\n[¹ÜµÀÎ´¶ÁÍê]\n");
-			return -3;  // Î´¶ÁÍê
+			pclose(pipe);  // å…³é—­ç®¡é“
+			printf("\n[ç®¡é“æœªè¯»å®Œ]\n");
+			return -3;  // æœªè¯»å®Œ
 		}
-	pclose(pipe);  // ¹Ø±Õ¹ÜµÀ
-	return 1;  // ÔËĞĞ³É¹¦
+	pclose(pipe);  // å…³é—­ç®¡é“
+	return 5;  // è¿è¡ŒæˆåŠŸ
 }
 
 int main()
 {
-	char cmd[64] = "rasphone -h \"Dr.COM\"";  //¶Ï¿ª 
+	char cmd[64] = "rasphone -h \"Dr.COM\"";  //æ–­å¼€ 
 	char result[512] = "";
 	int i = 0, j = 0;
 	char temp;
@@ -43,13 +42,14 @@ int main()
 	}
 	temp = cmd[j];
 	cmd[j] = '\0';
+  printf("\n");
 	printf(">>%s\n", cmd);
 	puts("-------------------------------------");
 	cmd[j] = temp;
 	execmd(cmd, result, 512);
 	printf("%s\n", result);
 	puts("-------------------------------------");
-	if (strstr(result, "ÃüÁîÒÑÍê³É")) {
+	if (strstr(result, "å‘½ä»¤å·²å®Œæˆ")) {
 		Sleep(2500);		
 	} else {
 		system("pause");
