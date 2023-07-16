@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 
-int execmd(const char * cmd, char * result, int len)
+float execmd(const char * cmd, char * result, int len)
 {
 	char buffer[128];
 	result[0] = '\0';   // result原有内容会直接被覆盖
