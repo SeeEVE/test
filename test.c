@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include <std.h>
 #include <windows.h>
+=======
+#include <stdlib.h>
 
 float execmd(const char * cmd, char * result, int len)
 {
