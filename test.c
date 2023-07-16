@@ -1,9 +1,8 @@
 #include <stdio.h>
-#include <windows.h>
-=======
 #include <stdlib.h>
+#include <window.h>
 
-float execmd(const char * cmd, char * result, int len)
+int execmd(const char * cmd, char * result, int len)
 {
 	char buffer[128];
 	result[0] = '\0';   // result原有内容会直接被覆盖
